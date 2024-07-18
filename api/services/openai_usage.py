@@ -21,7 +21,7 @@ def getSummary(content):
         ]
     )
     
-    return response['choices'][0]['message']['content']
+    return response.choices[0].message['content']
 
 def getAnswer(content, question):
     response = openai.ChatCompletion.create(
@@ -42,4 +42,4 @@ def getAnswer(content, question):
         ]
     )
     
-    return response['choices'][0]['message']['content']
+    return response.choices[0].message['content']

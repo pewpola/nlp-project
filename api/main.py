@@ -5,14 +5,13 @@ from fastapi.middleware.cors import CORSMiddleware
 import httpx
 from bs4 import BeautifulSoup
 
-from services import openai
+from services import openai_usage
 
 app = FastAPI()
 
 origins = [
     "http://localhost",
-    "http://localhost:8501",
-    "ohttps://8501-giuferreira-cursotecnic-cew0gqba5so.ws-us92.gitpod.i",
+    "http://localhost:8501"
 ]
 
 app.add_middleware(
@@ -38,11 +37,11 @@ async def root():
 @app.get("/summary", response_class = PlainTextResponse)
 async def summary(url: str):
     content = await getContent(url)
-    summary = openai.getSummary(content)
+    summary = openai_usage.getSummary(content)
     return summary
 
 @app.get("/answer", response_class = PlainTextResponse)
 async def answer(url: str, question: str):
     content = await getContent(url)
-    answer = openai.getAnswer(content, question)
+    answer = openai_usage.getAnswer(content, question)
     return answer
